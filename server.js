@@ -9,11 +9,11 @@ app.use(express.urlencoded({ extended: true }));
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
    userNewUrlParser: true,
-   useFindAndModify: false
+   useFindAndModify: false,
 })
 
 // Routes
-app.use(require("./routes/apiRoutes"));
+app.use(require("./routes/routes"));
 
 app.listen(port, () => {
    console.log(`http://localhost:${port}`);
