@@ -1,6 +1,6 @@
-const router = require("express").Router();
-const Workout = require("../models/workout.js");
-const path = require("path");
+const router = require("express").Router()
+const Workout = require("../models/workout.js")
+const path = require("path")
 
 // html routes
 router.get('/', function(req, res){
@@ -26,4 +26,28 @@ router.get('/api/workouts/range', (req, res) => {
     }).catch(err => {res.status(404).json(err)})
 })
 
-module.exports = router;
+router.put('/api/workouts/:id', (req, res) => {
+    let id = req.params.id
+    let body = req.body
+    let workout = {};
+
+    Workout.findByIdAndUpdate(id, {$push:{ exercises:body }}, 
+        (err) => {
+        if(err){res.json({
+            workout, success: false, msg: "Database Update Failure"
+        })}else{
+            res.json({
+                workout, success: true, msg: "Database Update Success"
+            })}
+    })
+})
+
+router.post('/api/workouts', ({ body }, res) => {
+    Workout.create(body).then(workout => {
+        res.json(workout)
+    }).catch(err => {
+        res.status(404).json(err)
+    })
+})
+
+module.exports = router
