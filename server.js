@@ -7,7 +7,7 @@ app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-var MONGOD_URI = process.env.MONGODB_URI || "mongodb://localhost/workout";
+var MONGOD_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 mongoose.connect(MONGOD_URI);
 
 // mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
