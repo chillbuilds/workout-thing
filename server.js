@@ -7,10 +7,13 @@ app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
-   userNewUrlParser: true,
-   useFindAndModify: false,
-})
+var MONGOD_URI = process.env.MONGODB_URI || "mongodb://localhost/workout";
+mongoose.connect(MONGOD_URI);
+
+// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
+//    userNewUrlParser: true,
+//    useFindAndModify: false,
+// })
 
 // Routes
 app.use(require("./routes/routes"));
